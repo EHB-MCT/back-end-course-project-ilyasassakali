@@ -13,6 +13,7 @@
 ## Gebruikte links
 
 - https://laravel.com/docs/9.x/starter-kits#laravel-breeze
+- https://fullcalendar.io/docs/initialize-globals
 
 ## About Laravel
 
