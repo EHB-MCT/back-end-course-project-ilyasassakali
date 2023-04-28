@@ -7,8 +7,8 @@
 
         <!-- loginbutton -->
         <div class="mt-4">
-            <button class=" ">
-                <a href="{{ route('login') }}" class="text-dark">
+            <button style="background-color: #1b1e21; padding: 10px; border-radius: 5px" class=" ">
+                <a href="{{ route('login') }}" class="text-white">
                     Login
                 </a>
             </button>
@@ -16,8 +16,8 @@
 
         <!-- registerbutton -->
         <div class="mt-4">
-            <button class=" ">
-                <a href="{{ route('register') }}" class="text-dark">
+            <button style="background-color: #1b1e21; padding: 10px; border-radius: 5px" class=" ">
+                <a href="{{ route('register') }}" class="text-white">
                     Register
                 </a>
             </button>

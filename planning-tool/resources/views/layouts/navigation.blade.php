@@ -13,14 +13,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Agenda') }}
                     </x-nav-link>
                     @if (Auth::check() && Auth::user()->isAdmin())
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard edit') }}
+                        <x-nav-link :href="route('dashboard')" >
+                            {{ __('Vakkenbeheer') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard delete') }}
+                        <x-nav-link :href="route('dashboard')">
+                            {{ __('Planningopstel') }}
                         </x-nav-link>
                     @endif
 
