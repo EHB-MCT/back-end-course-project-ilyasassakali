@@ -16,8 +16,8 @@
                         {{ __('Agenda') }}
                     </x-nav-link>
                     @if (Auth::check() && Auth::user()->isAdmin())
-                        <x-nav-link :href="route('dashboard')" >
-                            {{ __('Vakkenbeheer') }}
+                        <x-nav-link :href="route('vakbeheer')" :active="request()->routeIs('vakbeheer')">
+                            {{ __('Vakbeheer') }}
                         </x-nav-link>
                         <x-nav-link :href="route('dashboard')">
                             {{ __('Planningopstel') }}
