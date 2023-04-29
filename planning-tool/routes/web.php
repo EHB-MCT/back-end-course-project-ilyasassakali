@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VakController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/vakbeheer', function () {
-        return view('vakbeheer');
-    })->name('vakbeheer');
+
+    Route::get('/vakken', function () {
+        return view('vakken.index');
+    })->name('vakken.index');
+
+    Route::resource("/vak", VakController::class);
+
 });
+
 
 
 
