@@ -12,6 +12,7 @@
 
 ## Gebruikte links
 
+- videos en cursus leerkracht backend EHB multimedia 
 - https://laravel.com/docs/9.x/starter-kits#laravel-breeze
 - https://fullcalendar.io/docs/initialize-globals
 - https://laravel.com/docs/10.x/sail#main-content
