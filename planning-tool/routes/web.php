@@ -24,16 +24,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-
-    Route::get('/vakken', function () {
-        return view('vakken.index');
-    })->name('vakken.index');
-
     Route::resource("/vak", VakController::class);
+    Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');
+
+
+
+
 
 });
-
-
 
 
 

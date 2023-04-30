@@ -47,7 +47,8 @@ class VakController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $vak = Vak::find($id);
+        return view('vakken.edit')->with('vakken',$vak);
     }
 
     /**
@@ -55,7 +56,10 @@ class VakController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $vak = Vak::find($id);
+        $input = $request->all();
+        $vak->update($input);
+        return redirect('vak')->with('succes-message','Vak succesvol bewerkt!');
     }
 
     /**
@@ -63,6 +67,8 @@ class VakController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $vak = Vak::findOrFail($id);
+        $vak->delete();
+        return redirect('vak')->with('succes-message','Vak succesvol verwijderd!');
     }
 }

@@ -25,22 +25,28 @@
                         </thead>
                         <tbody>
 
+                        @foreach($vakken as $vak)
                         <tr>
-                            <td class="text-left">1</td>
-                            <td class="text-left">Dev 3</td>
-                            <td class="text-left">Multimedia en creatief technologie</td>
-                            <td class="text-left">3</td>
+                            <td class="text-left">{{$loop->iteration}}</td>
+                            <td class="text-left">{{$vak->naam}}</td>
+                            <td class="text-left">{{$vak->opleiding}}</td>
+                            <td class="text-left">{{$vak->semester}}</td>
 
-                            <td class="text-left">
-                                
-                                <a href="" class="block mt-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" >
+                            <td class="text-left inline-flex">
+                                <a href="{{ url('/vak/edit/'. $vak->id) }}" class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                     bewerk
                                 </a>
-                                <a href="" class="block mt-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" >
-                                    verwijder
-                                </a>
+                                <form action="{{ route('vak.destroy', $vak->id) }}" method="post" class="ml-2 inline-flex">
+                                    {!! csrf_field() !!}
+                                    {!! method_field('delete') !!}
+                                    <button type="submit" class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        verwijder
+                                    </button>
+                                </form>
                             </td>
+
                         </tr>
+                        @endforeach
 
                         </tbody>
                     </table>
