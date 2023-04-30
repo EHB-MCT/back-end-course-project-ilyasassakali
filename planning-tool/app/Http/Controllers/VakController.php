@@ -21,7 +21,7 @@ class VakController extends Controller
      */
     public function create()
     {
-        //
+        return view('vakken.create');
     }
 
     /**
@@ -29,7 +29,9 @@ class VakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        Vak::create($input);
+        return redirect('vak')->with('succes-message','Vak succesvol aangemaakt!');
     }
 
     /**

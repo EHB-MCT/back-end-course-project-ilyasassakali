@@ -11,5 +11,9 @@ class Vak extends Model
     protected $table = 'vakken';
     protected $primaryKey='id';
     protected $fillable=['naam','opleiding','semester'];
+
+
+
+
 }
 
