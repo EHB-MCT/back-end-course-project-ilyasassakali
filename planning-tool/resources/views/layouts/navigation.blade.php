@@ -19,7 +19,7 @@
                         <x-nav-link :href="route('vak.index')" :active="request()->routeIs('vak.index')">
                             {{ __('Vakbeheer') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('dashboard')">
+                        <x-nav-link :href="route('planning.index')" :active="request()->routeIs('planning.index')">
                             {{ __('Planningopstel') }}
                         </x-nav-link>
                     @endif
