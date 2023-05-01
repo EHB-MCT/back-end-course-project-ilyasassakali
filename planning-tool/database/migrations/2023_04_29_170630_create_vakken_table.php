@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vakken', function (Blueprint $table) {
-            $table->uuid('id')->unique();
+            $table->increments('id');
             $table->string("naam");
             $table->string("opleiding");
             $table->string("semester");
