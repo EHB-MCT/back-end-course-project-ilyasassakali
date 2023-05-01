@@ -23,19 +23,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    /*Route::resource("/vak", VakController::class);
-    Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');*/
-
-    Route::middleware('admin.only')->group(function () {
-        Route::resource("/vak", VakController::class);
-        Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');
-    });
-
-
-
 });
 
+Route::middleware('admin.only')->group(function () {
+    Route::resource("/vak", VakController::class);
+    Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');
+});
 
 
 
