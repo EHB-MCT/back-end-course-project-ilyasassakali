@@ -40,8 +40,16 @@
                         var startFormatted = start.getDate() + '/' + (start.getMonth() + 1) + '/' + start.getFullYear() + ' ' + start.getHours() + ':' + start.getMinutes();
                         var endFormatted = end.getDate() + '/' + (end.getMonth() + 1) + '/' + end.getFullYear() + ' ' + end.getHours() + ':' + end.getMinutes();
                         alert('Geselecteerd van ' + startFormatted + ' tot ' + endFormatted);
-                    }
 
+                    },
+                    events: [
+                        {
+                            id: 1,
+                            title: 'Mon événement',
+                            start: '2023-05-01T08:00:00',
+                            end: '2023-05-01T10:00:00'
+                        }
+                    ],
                 });
                 calendar.render();
             });
