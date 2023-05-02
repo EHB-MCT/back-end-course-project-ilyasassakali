@@ -14,6 +14,8 @@ class VakController extends Controller
     {
         $vakken = Vak::all();
         return view('vakken.index')->with('vakken',$vakken);
+
+
     }
 
     /**
