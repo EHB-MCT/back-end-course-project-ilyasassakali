@@ -1,17 +1,24 @@
 <x-app-layout>
     <style>
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 9998;
+        }
         #popup-modal {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 9999;
-            width: 50%;
-            background-color: #FCFCFC;
+            width: 40%;
+            background-color: #fff;
             border-radius: 10px;
-            border: 3px solid black;
         }
-
     </style>
 
     <x-slot name="header">
@@ -28,6 +35,8 @@
                     <div id='calendar'></div>
                 </div>
                 <!-- Main modal -->
+                <div id="overlay" class="hidden"></div>
+
                 <div id="popup-modal" style="" class="hidden">
                     <div class="">
                         <div class="px-6 py-4 w-1/2">
@@ -98,6 +107,8 @@
             document.getElementById("popup-close-btn").addEventListener("click", function() {
                 var modal = document.getElementById("popup-modal");
                 modal.style.display = "none";
+
+
             });
 
 
@@ -121,14 +132,23 @@
                         var start = info.start;
                         var end = info.end;
                         var modal = document.getElementById("popup-modal");
+                        var overlay = document.getElementById('overlay');
+                        var closeButton = document.getElementById('popup-close-btn');
+
                         modal.style.display = "block";
+                        overlay.style.display = 'block';
                         // Set the values of date, start time, and end time inputs in the form to the selected date and times
                         document.getElementById("datum").value = start.toISOString().slice(0,10);
                         document.getElementById("beginuur").value = start.toTimeString().slice(0,5);
                         document.getElementById("einduur").value = end.toTimeString().slice(0,5);
+                        closeButton.addEventListener('click', function() {
+                            overlay.style.display = 'none';
+                            modal.style.display = 'none';
+                        });
                     },
 
                 });
+
                 calendar.render();
             });
         </script>

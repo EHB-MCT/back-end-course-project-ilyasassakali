@@ -15,7 +15,9 @@ return new class extends Migration
             $table->increments('id');
             $table->string("naam");
             $table->string("opleiding");
-            $table->string("semester");
+            $table->integer("semester");
+            $table->time("duur");
+            $table->integer("sessies");
             $table->timestamps();
         });
     }

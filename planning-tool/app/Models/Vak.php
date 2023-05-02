@@ -10,7 +10,7 @@ class Vak extends Model
     use HasFactory;
     protected $table = 'vakken';
     protected $primaryKey='id';
-    protected $fillable=['naam','opleiding','semester'];
+    protected $fillable=['naam','opleiding','semester','duur','sessies'];
 
 
 

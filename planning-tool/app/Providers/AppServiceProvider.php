@@ -12,6 +12,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $vakken = Vak::all();
         View::share('vakken', $vakken);
+
+
     }
 
     /**
