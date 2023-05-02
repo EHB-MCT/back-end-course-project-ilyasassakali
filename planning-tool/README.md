@@ -17,6 +17,7 @@
 - https://fullcalendar.io/docs/initialize-globals
 - https://laravel.com/docs/10.x/sail#main-content
 - https://fullcalendar.io/docs/selectable
+- https://fullcalendar.io/docs
 
 ## About Laravel
 
