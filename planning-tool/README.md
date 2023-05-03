@@ -18,6 +18,8 @@
 - https://laravel.com/docs/10.x/sail#main-content
 - https://fullcalendar.io/docs/selectable
 - https://fullcalendar.io/docs
+- https://techvblogs.com/blog/laravel-9-custom-validation-rules
+- https://laravel.com/docs/5.0/validation#custom-validation-rules
 
 ## About Laravel
 

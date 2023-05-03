@@ -41,7 +41,13 @@
                     <div class="">
                         <div class="px-6 py-4 w-1/2">
                             <h2 class="text-lg font-medium text-gray-900">Vak toevoegen aan planning:</h2>
-                            <form>
+                            <form action="{{ route('storeEvent') }}" method="POST">
+                                @csrf
+                                <input type="hidden" id="vak_id" name="vak_id">
+
+
+
+
                                 <div class="mb-4">
                                     <label class="block font-medium text-sm text-gray-700" for="date">Datum</label>
                                     <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="date" id="datum" name="datum" required>
@@ -76,8 +82,8 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label class="block font-medium text-sm text-gray-700" for="location">Lokaal</label>
-                                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="location" name="location" required>
+                                    <label class="block font-medium text-sm text-gray-700" for="lokaal">Lokaal</label>
+                                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="lokaal" name="lokaal" required>
                                         <option value="">Selecteer een lokaal</option>
                                         <option value="Audi 1">Audi 1</option>
                                         <option value="Audi 2">Audi 2</option>
@@ -87,13 +93,14 @@
                                 </div>
                                 <div class="mb-4">
                                     <label class="block font-medium text-sm text-gray-700" for="teacher">Leerkracht</label>
-                                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="teacher" name="teacher" required>
+                                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="leerkracht" name="leerkracht" required>
                                         <option value="">Selecteer een leerkracht</option>
                                         <option value="Bert Heyman">Bert Heyman</option>
                                         <option value="Mike Derycke">Mike Derycke</option>
                                         <option value="Fenna Zamouri">Fenna Zamouri</option>
                                         <option value="Wim Hambrouck">Wim Hambrouck</option>
                                     </select>
+
                                 </div>
 
                                 <div class="flex justify-between">
@@ -147,7 +154,6 @@
 
                         modal.style.display = "block";
                         overlay.style.display = 'block';
-                        // Set the values of date, start time, and end time inputs in the form to the selected date and times
                         document.getElementById("datum").value = start.toISOString().slice(0,10);
                         document.getElementById("beginuur").value = start.toTimeString().slice(0,5);
                         document.getElementById("einduur").value = end.toTimeString().slice(0,5);
@@ -161,6 +167,7 @@
                             var vak = @json($vakken->toArray())
                         .find(function(vak) { return vak.naam === vak_value; });
                             if (vak) {
+                                document.getElementById('vak_id').value = vak.id;
                                 document.getElementById('duur_div').style.display = 'block';
                                 document.getElementById('sessies_div').style.display = 'block';
                                 document.getElementById('duur').value = vak.duur;
@@ -175,6 +182,8 @@
                     },
 
                 });
+
+
 
                 calendar.render();
             });

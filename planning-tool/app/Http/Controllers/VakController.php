@@ -73,4 +73,7 @@ class VakController extends Controller
         $vak->delete();
         return redirect('vak')->with('succes-message','Vak succesvol verwijderd!');
     }
+
+
+
 }

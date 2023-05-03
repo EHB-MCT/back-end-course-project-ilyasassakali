@@ -12,7 +12,10 @@ class Vak extends Model
     protected $primaryKey='id';
     protected $fillable=['naam','opleiding','semester','duur','sessies'];
 
-
+    public function agendas()
+    {
+        return $this->hasMany(Agenda::class);
+    }
 
 
 }

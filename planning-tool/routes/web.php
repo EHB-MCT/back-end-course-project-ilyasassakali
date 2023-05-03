@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VakController;
@@ -32,6 +33,11 @@ Route::middleware('admin.only')->group(function () {
     Route::get('/planning.index', function () {
         return view('planning.index');
     })->name('planning.index');
+
+    Route::post('/agenda/store', [AgendaController::class, 'storeEvent'])->name('storeEvent');
+    Route::get('/planning', [AgendaController::class, 'index'])->name('planning.index');
+
+
 });
 
 
