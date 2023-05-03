@@ -89,33 +89,22 @@
                         });
                     },
                     eventClick: function(info) {
-                        if (confirm('Weet u zeker dat u dit evenement wilt verwijderen?')) {
-                            var eventId = info.event.id;
-                            // Ajoutez un champ caché pour stocker l'ID de l'événement
-                            var deleteForm = document.createElement('form');
-                            deleteForm.method = 'POST';
-                            deleteForm.action = '/planning/' + eventId;
-                            var csrfInput = document.createElement('input');
-                            csrfInput.type = 'hidden';
-                            csrfInput.name = '_token';
-                            csrfInput.value = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                            deleteForm.appendChild(csrfInput);
-                            var deleteMethodInput = document.createElement('input');
-                            deleteMethodInput.type = 'hidden';
-                            deleteMethodInput.name = '_method';
-                            deleteMethodInput.value = 'DELETE';
-                            deleteForm.appendChild(deleteMethodInput);
-                            document.body.appendChild(deleteForm);
-                            deleteForm.submit();
-                        }
+                        var eventId = info.event.id;
+                        var deleteModal = document.getElementById("delete-modal");
+                        var deleteOverlay = document.getElementById("delete-overlay");
+                        var deleteCloseButton = document.getElementById("delete-close-btn");
+                        var deleteForm = document.getElementById("delete-form");
+                        deleteForm.action = '/planning/' + eventId;
+                        deleteModal.style.display = "block";
+                        deleteOverlay.style.display = "block";
+                        deleteCloseButton.addEventListener('click', function() {
+                            deleteOverlay.style.display = 'none';
+                            deleteModal.style.display = 'none';
+                        });
 
                     }
-
-
                 });
-
                 calendar.addEventSource(@json($calendarEvents));
-
                 calendar.render();
             });
         </script>

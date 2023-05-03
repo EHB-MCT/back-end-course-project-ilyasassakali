@@ -64,7 +64,7 @@ class AgendaController extends Controller
     {
         $agenda->delete();
 
-        return redirect()->route('planning.index')->with('success-message', 'Événement supprimé avec succès !');
+        return redirect()->route('planning.index')->with('success-message', 'Evenement succesvol verwijderd!');
     }
 
 
