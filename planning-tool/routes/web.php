@@ -29,7 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::post('/agenda/store', [AgendaController::class, 'storeEvent'])->name('storeEvent');
         Route::get('/planning', [AgendaController::class, 'index'])->name('planning.index');
-        
+
     });
 });
 

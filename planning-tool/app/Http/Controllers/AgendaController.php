@@ -56,7 +56,7 @@ class AgendaController extends Controller
 
         Agenda::create($data);
 
-        return redirect()->route('planning.index')->with('success-message', 'Vak succesvol toegevoegd !');
+        return redirect()->route('planning.index')->with('success-message', 'Vak succesvol toegevoegd!');
     }
 
 
