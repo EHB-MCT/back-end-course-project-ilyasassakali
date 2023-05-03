@@ -10,7 +10,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h2>Selecteer om planning op te stellen of veranderingen te maken:</h2>
+                    @if(session('success-message'))
+                        <div class="" style="color: green">
+                            {{ session('success-message') }}
+                        </div>
+                    @endif
                     <div id='calendar'></div>
+
+
                 </div>
                 @include('layouts.create_modal')
             </div>

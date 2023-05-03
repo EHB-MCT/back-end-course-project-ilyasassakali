@@ -33,7 +33,7 @@ class VakController extends Controller
     {
         $input = $request->all();
         Vak::create($input);
-        return redirect('vak')->with('succes-message','Vak succesvol aangemaakt!');
+        return redirect('vak')->with('success-message','Vak succesvol aangemaakt!');
     }
 
     /**
@@ -61,7 +61,7 @@ class VakController extends Controller
         $vak = Vak::find($id);
         $input = $request->all();
         $vak->update($input);
-        return redirect('vak')->with('succes-message','Vak succesvol bewerkt!');
+        return redirect('vak')->with('success-message','Vak succesvol bewerkt!');
     }
 
     /**
@@ -71,7 +71,7 @@ class VakController extends Controller
     {
         $vak = Vak::findOrFail($id);
         $vak->delete();
-        return redirect('vak')->with('succes-message','Vak succesvol verwijderd!');
+        return redirect('vak')->with('success-message','Vak succesvol verwijderd!');
     }
 
 
