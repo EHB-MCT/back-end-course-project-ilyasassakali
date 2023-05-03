@@ -33,6 +33,7 @@ class AgendaController extends Controller
         $events = Agenda::with('vak')->get();
         $calendarEvents = $events->map(function ($event) {
             return [
+                'id' => $event->id,
                 'title' => $event->vak->naam . ' - ' . $event->vak->opleiding . ' - ' . $event->leerkracht . ' - ' . $event->lokaal,
                 'start' => $event->datum . 'T' . $event->beginuur,
                 'end' => $event->datum . 'T' . $event->einduur,
@@ -56,9 +57,15 @@ class AgendaController extends Controller
 
         Agenda::create($data);
 
-        return redirect()->route('planning.index')->with('success-message', 'Vak succesvol toegevoegd!');
+        return redirect()->route('planning.index')->with('success-message', 'Evenement succesvol gepland!');
     }
 
+    public function deleteEvent(Agenda $agenda)
+    {
+        $agenda->delete();
+
+        return redirect()->route('planning.index')->with('success-message', 'Événement supprimé avec succès !');
+    }
 
 
 

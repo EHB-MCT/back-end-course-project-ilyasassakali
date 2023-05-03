@@ -29,6 +29,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::post('/agenda/store', [AgendaController::class, 'storeEvent'])->name('storeEvent');
         Route::get('/planning', [AgendaController::class, 'index'])->name('planning.index');
+        Route::delete('/planning/{agenda}', [App\Http\Controllers\AgendaController::class, 'deleteEvent'])->name('planning.destroy');
+
 
     });
 });
