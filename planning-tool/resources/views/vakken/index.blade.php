@@ -48,13 +48,13 @@
 
                             <td class="text-left inline-flex">
                                 <a href="{{ url('/vak/edit/'. $vak->id) }}" class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                    bewerk
+                                    bewerken
                                 </a>
                                 <form action="{{ route('vak.destroy', $vak->id) }}" method="post" class="ml-2 inline-flex">
                                     {!! csrf_field() !!}
                                     {!! method_field('delete') !!}
-                                    <button type="submit" class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                        verwijder
+                                    <button type="submit" class="mt-2 inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        verwijderen
                                     </button>
                                 </form>
                             </td>

@@ -34,6 +34,13 @@
                             meridiem: 'short'
                         },
                         eventDisplay: 'auto',
+                        eventContent: function (args) {
+                            var event = args.event;
+                            var title = event.title.split(' - ').join('<br>');
+                            return {
+                                html: title,
+                            };
+                        }
 
                     });
 
