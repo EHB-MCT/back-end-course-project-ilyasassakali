@@ -21,29 +21,22 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AgendaController::class, 'dashboard'])->name('dashboard');
+
+    Route::middleware('admin.only')->group(function () {
+        Route::resource("/vak", VakController::class);
+        Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');
+
+        Route::get('/planning.index', function () {
+            return view('planning.index');
+        })->name('planning.index');
+
+        Route::post('/agenda/store', [AgendaController::class, 'storeEvent'])->name('storeEvent');
+        Route::get('/planning', [AgendaController::class, 'index'])->name('planning.index');
+
+
+    });
 });
-
-Route::middleware('admin.only')->group(function () {
-    Route::resource("/vak", VakController::class);
-    Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');
-
-    Route::get('/planning.index', function () {
-        return view('planning.index');
-    })->name('planning.index');
-
-    Route::post('/agenda/store', [AgendaController::class, 'storeEvent'])->name('storeEvent');
-    Route::get('/planning', [AgendaController::class, 'index'])->name('planning.index');
-
-
-});
-
-
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

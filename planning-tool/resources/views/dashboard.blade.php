@@ -33,8 +33,12 @@
                             omitZeroMinute: false,
                             meridiem: 'short'
                         },
+                        eventDisplay: 'auto',
 
                     });
+
+                    calendar.addEventSource(@json($calendarEvents));
+
                     calendar.render();
                 });
             </script>

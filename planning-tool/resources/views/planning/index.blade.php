@@ -183,7 +183,7 @@
 
                 });
 
-
+                calendar.addEventSource(@json($calendarEvents));
 
                 calendar.render();
             });
