@@ -27,14 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource("/vak", VakController::class);
         Route::get('/vak/edit/{id}', [VakController::class, 'edit'])->name('vak.edit');
 
-        Route::get('/planning.index', function () {
-            return view('planning.index');
-        })->name('planning.index');
-
         Route::post('/agenda/store', [AgendaController::class, 'storeEvent'])->name('storeEvent');
         Route::get('/planning', [AgendaController::class, 'index'])->name('planning.index');
-
-
+        
     });
 });
 
