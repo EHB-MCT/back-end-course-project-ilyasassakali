@@ -17,29 +17,48 @@
                     @endif
                     <div id='calendar'></div>
                 </div>
-                @include('layouts.create_modal')
-                @include('layouts.delete_modal')
-
+                @include('layouts.admin.create_modal')
+                @include('layouts.admin.delete_modal')
+                @include('layouts.admin.edit_modal')
             </div>
         </div>
     </div>
 
-@push('scripts')
+    @push('scripts')
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>
         <script>
-            document.getElementById("popup-close-btn").addEventListener("click", function() {
+            function updateDurationAndSessions(inputElement, modalPrefix) {
+                var vak_value = inputElement.value;
+                var vak = @json($vakken->toArray()).find(function (vak) {
+                    return vak.naam === vak_value;
+                });
+                if (vak) {
+                    document.getElementById(modalPrefix +'duur').value = vak.duur;
+                    document.getElementById(modalPrefix +'sessies').value = vak.sessies;
+                    document.getElementById(modalPrefix +'duur_div').classList.remove('hidden');
+                    document.getElementById(modalPrefix +'sessies_div').classList.remove('hidden');
+                } else {
+                    document.getElementById(modalPrefix +'duur_div').classList.add('hidden');
+                    document.getElementById(modalPrefix +'sessies_div').classList.add('hidden');
+                    document.getElementById(modalPrefix +'duur').value = '';
+                    document.getElementById(modalPrefix +'sessies').value = '';
+                }
+            }
+
+
+            document.getElementById("popup-close-btn").addEventListener("click", function () {
                 var modal = document.getElementById("popup-modal");
                 modal.style.display = "none";
             });
 
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
-                    locale:'nl',
+                    locale: 'nl',
                     initialView: 'timeGridWeek',
                     slotMinTime: '8:00:00',
                     slotMaxTime: '22:00:00',
-                    selectable : true,
+                    selectable: true,
                     weekends: false,
                     slotLabelFormat: {
                         hour: 'numeric',
@@ -54,7 +73,7 @@
                             html: title,
                         };
                     },
-                    select: function(info) {
+                    select: function (info) {
                         var start = info.start;
                         var end = info.end;
                         var modal = document.getElementById("popup-modal");
@@ -63,17 +82,20 @@
 
                         modal.style.display = "block";
                         overlay.style.display = 'block';
-                        document.getElementById("datum").value = start.toISOString().slice(0,10);
-                        document.getElementById("beginuur").value = start.toTimeString().slice(0,5);
-                        document.getElementById("einduur").value = end.toTimeString().slice(0,5);
-                        closeButton.addEventListener('click', function() {
+                        document.getElementById("datum").value = start.toISOString().slice(0, 10);
+                        document.getElementById("beginuur").value = start.toTimeString().slice(0, 5);
+                        document.getElementById("einduur").value = end.toTimeString().slice(0, 5);
+                        closeButton.addEventListener('click', function () {
                             overlay.style.display = 'none';
                             modal.style.display = 'none';
                         });
-                        document.getElementById('vak').addEventListener('change', function() {
+                        document.getElementById('vak').addEventListener('change', function () {
                             var vak_value = this.value;
                             var vak = @json($vakken->toArray())
-                        .find(function(vak) { return vak.naam === vak_value; });
+                        .
+                            find(function (vak) {
+                                return vak.naam === vak_value;
+                            });
                             if (vak) {
                                 document.getElementById('vak_id').value = vak.id;
                                 document.getElementById('duur_div').style.display = 'block';
@@ -88,7 +110,8 @@
                             }
                         });
                     },
-                    eventClick: function(info) {
+                    eventClick: function (info) {
+                        var eventData = info.event;
                         var eventId = info.event.id;
                         var deleteModal = document.getElementById("delete-modal");
                         var deleteOverlay = document.getElementById("delete-overlay");
@@ -97,15 +120,59 @@
                         deleteForm.action = '/planning/' + eventId;
                         deleteModal.style.display = "block";
                         deleteOverlay.style.display = "block";
-                        deleteCloseButton.addEventListener('click', function() {
+                        deleteCloseButton.addEventListener('click', function () {
                             deleteOverlay.style.display = 'none';
                             deleteModal.style.display = 'none';
                         });
+
+                        /**/
+
+                        document.getElementById("edit-datum").value = eventData.startStr.slice(0, 10);
+                        document.getElementById("edit-beginuur").value = eventData.startStr.slice(11, 16);
+                        document.getElementById("edit-einduur").value = eventData.endStr.slice(11, 16);
+                        var titleParts = eventData.title.split(' - ');
+                        document.getElementById("edit-vak").value = titleParts[0];
+                        document.getElementById("edit-leerkracht").value = titleParts[2];
+                        document.getElementById("edit-lokaal").value = titleParts[3];
+                        /**/
+
+
+                        document.getElementById("update-redirect-btn").addEventListener("click", function () {
+                            var deleteModal = document.getElementById("delete-modal");
+                            var deleteOverlay = document.getElementById("delete-overlay");
+                            var editModal = document.getElementById("edit-modal");
+
+                            deleteModal.style.display = "none";
+                            deleteOverlay.style.display = "none";
+
+                            editModal.style.display = "block";
+                            deleteOverlay.style.display = "block";
+                        });
+
+                        document.getElementById("edit-modal-close-btn").addEventListener("click", function () {
+                            var editModal = document.getElementById("edit-modal");
+                            var editOverlay = document.getElementById("delete-overlay");
+
+                            editModal.style.display = "none";
+                            editOverlay.style.display = "none";
+                        });
+
+
+
+                        document.getElementById('edit-vak').addEventListener('change', function () {
+                            updateDurationAndSessions(this);
+                        });
+
+                        document.getElementById('vak').addEventListener('change', function () {
+                            updateDurationAndSessions(this);
+                        });
+
 
                     }
                 });
                 calendar.addEventSource(@json($calendarEvents));
                 calendar.render();
+
             });
         </script>
     @endpush

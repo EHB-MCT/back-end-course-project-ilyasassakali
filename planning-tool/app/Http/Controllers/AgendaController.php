@@ -68,5 +68,22 @@ class AgendaController extends Controller
     }
 
 
+    public function update(Request $request, Agenda $agenda)
+    {
+        $data = $request->validate([
+            'vak_id' => 'required|integer',
+            'datum' => 'required|date',
+            'beginuur' => ['required', new TimeFormat()],
+            'einduur' => ['required', new TimeFormat()],
+            'lokaal' => 'required',
+            'leerkracht' => 'required'
+        ]);
+
+        $agenda->update($data);
+
+        return redirect()->route('planning.index')->with('success-message', 'Evenement succesvol bijgewerkt!');
+    }
+
+
 
 }

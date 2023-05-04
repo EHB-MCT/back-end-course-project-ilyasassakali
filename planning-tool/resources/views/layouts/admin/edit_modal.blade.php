@@ -8,7 +8,7 @@
         background-color: rgba(0,0,0,0.5);
         z-index: 9998;
     }
-    #popup-modal {
+    #edit-modal {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -23,31 +23,28 @@
 <!-- Main modal -->
 <div id="overlay" class="hidden"></div>
 
-<div id="popup-modal" style="" class="hidden">
+<div id="edit-modal" style="" class="hidden">
     <div class="">
         <div class="px-6 py-4 w-1/2">
-            <h2 class="text-lg font-medium text-gray-900">Vak toevoegen aan planning:</h2>
-            <form action="{{ route('storeEvent') }}" method="POST">
+            <h2 class="text-lg font-medium text-gray-900">Evenement bewerken:</h2>
+            <form action="" method="POST">
                 @csrf
-                <input type="hidden" id="vak_id" name="vak_id">
-
-
-
+                <input  type="hidden" id="vak_id" name="vak_id">
 
                 <div class="mb-4">
                     <label class="block font-medium text-sm text-gray-700" for="date">Datum</label>
-                    <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="date" id="datum" name="datum" required>
+                    <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="date" id="edit-datum" name="datum" required>
                 </div>
                 <div class="mb-4">
                     <label class="block font-medium text-sm text-gray-700" for="time">Begin- en Einduur</label>
-                    <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="time" id="beginuur" name="beginuur" required>
-                    <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm " type="time" id="einduur" name="einduur" required>
+                    <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="time" id="edit-beginuur" name="beginuur" required>
+                    <input class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm " type="time" id="edit-einduur" name="einduur" required>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/2 mr-4">
                         <label class="block font-medium text-sm text-gray-700" for="vak">Vak</label>
-                        <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="vak" name="vak" required>
+                        <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="edit-vak" name="vak" required>
                             <option value="">Selecteer een vak</option>
                             @foreach($vakken as $vak)
                                 <option value="{{$vak->naam}}">{{$vak->naam}}</option>
@@ -69,7 +66,7 @@
 
                 <div class="mb-4">
                     <label class="block font-medium text-sm text-gray-700" for="lokaal">Lokaal</label>
-                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="lokaal" name="lokaal" required>
+                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="edit-lokaal" name="lokaal" required>
                         <option value="">Selecteer een lokaal</option>
                         <option value="Audi 1">Audi 1</option>
                         <option value="Audi 2">Audi 2</option>
@@ -79,7 +76,7 @@
                 </div>
                 <div class="mb-4">
                     <label class="block font-medium text-sm text-gray-700" for="teacher">Leerkracht</label>
-                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="leerkracht" name="leerkracht" required>
+                    <select class="w-1/2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="edit-leerkracht" name="leerkracht" required>
                         <option value="">Selecteer een leerkracht</option>
                         <option value="Bert Heyman">Bert Heyman</option>
                         <option value="Mike Derycke">Mike Derycke</option>
@@ -91,9 +88,9 @@
 
                 <div class="flex justify-between">
                     <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" type="submit">
-                        Toevoegen
+                        Bewerken
                     </button>
-                    <button id="popup-close-btn" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" type="button">
+                    <button id="edit-modal-close-btn" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" type="button">
                         Annuleren
                     </button>
                 </div>
