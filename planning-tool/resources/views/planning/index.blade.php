@@ -27,25 +27,7 @@
     @push('scripts')
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>
         <script>
-            function updateDurationAndSessions(inputElement, modalPrefix) {
-                var vak_value = inputElement.value;
-                var vak = @json($vakken->toArray()).find(function (vak) {
-                    return vak.naam === vak_value;
-                });
-                if (vak) {
-                    document.getElementById(modalPrefix +'duur').value = vak.duur;
-                    document.getElementById(modalPrefix +'sessies').value = vak.sessies;
-                    document.getElementById(modalPrefix +'duur_div').classList.remove('hidden');
-                    document.getElementById(modalPrefix +'sessies_div').classList.remove('hidden');
-                } else {
-                    document.getElementById(modalPrefix +'duur_div').classList.add('hidden');
-                    document.getElementById(modalPrefix +'sessies_div').classList.add('hidden');
-                    document.getElementById(modalPrefix +'duur').value = '';
-                    document.getElementById(modalPrefix +'sessies').value = '';
-                }
-            }
-
-
+            
             document.getElementById("popup-close-btn").addEventListener("click", function () {
                 var modal = document.getElementById("popup-modal");
                 modal.style.display = "none";
@@ -155,16 +137,6 @@
 
                             editModal.style.display = "none";
                             editOverlay.style.display = "none";
-                        });
-
-
-
-                        document.getElementById('edit-vak').addEventListener('change', function () {
-                            updateDurationAndSessions(this);
-                        });
-
-                        document.getElementById('vak').addEventListener('change', function () {
-                            updateDurationAndSessions(this);
                         });
 
 
