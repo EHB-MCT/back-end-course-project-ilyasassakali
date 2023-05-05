@@ -1,4 +1,7 @@
 <x-app-layout>
+    <style>
+        @include('components.popover')
+    </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Agenda') }}
@@ -40,6 +43,43 @@
                             return {
                                 html: title,
                             };
+                        },
+                        eventDidMount: function(info) {
+                            var event = info.event;
+                            var title = event.title;
+                            var start = event.start;
+                            var end = event.end;
+
+                            var formattedStart = start.toLocaleString('nl-NL', {
+                                weekday: 'short',
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+
+                            var formattedEnd = end.toLocaleString('nl-NL', {
+                                weekday: 'short',
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+
+                            var popover = document.createElement('div');
+                            popover.className = 'popover bottom';
+                            popover.innerHTML = `
+                        <p><strong>Info:</strong> ${title}</p>
+                        <p><strong>Begin:</strong> ${formattedStart}</p>
+                        <p><strong>Einde:</strong> ${formattedEnd}</p>`;
+
+                            info.el.appendChild(popover);
+                            info.el.addEventListener('mouseenter', function() {
+                                popover.style.display = 'block';
+                            });
+                            info.el.addEventListener('mouseleave', function() {
+                                popover.style.display = 'none';
+                            });
                         }
 
                     });
