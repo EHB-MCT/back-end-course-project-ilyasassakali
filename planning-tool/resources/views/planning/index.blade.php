@@ -27,7 +27,7 @@
     @push('scripts')
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>
         <script>
-            
+
             document.getElementById("popup-close-btn").addEventListener("click", function () {
                 var modal = document.getElementById("popup-modal");
                 modal.style.display = "none";
@@ -106,9 +106,6 @@
                             deleteOverlay.style.display = 'none';
                             deleteModal.style.display = 'none';
                         });
-
-                        /**/
-
                         document.getElementById("edit-datum").value = eventData.startStr.slice(0, 10);
                         document.getElementById("edit-beginuur").value = eventData.startStr.slice(11, 16);
                         document.getElementById("edit-einduur").value = eventData.endStr.slice(11, 16);
@@ -116,8 +113,6 @@
                         document.getElementById("edit-vak").value = titleParts[0];
                         document.getElementById("edit-leerkracht").value = titleParts[2];
                         document.getElementById("edit-lokaal").value = titleParts[3];
-                        /**/
-
 
                         document.getElementById("update-redirect-btn").addEventListener("click", function () {
                             var deleteModal = document.getElementById("delete-modal");
@@ -131,6 +126,8 @@
                             deleteOverlay.style.display = "block";
                         });
 
+
+
                         document.getElementById("edit-modal-close-btn").addEventListener("click", function () {
                             var editModal = document.getElementById("edit-modal");
                             var editOverlay = document.getElementById("delete-overlay");
@@ -139,6 +136,22 @@
                             editOverlay.style.display = "none";
                         });
 
+                        document.getElementById('edit-vak').addEventListener('change', function () {
+                            var vak_value = this.value;
+                            var vak = @json($vakken->toArray())
+
+                        .find(function (vak) {
+                                return vak.naam === vak_value;
+                            });
+                            if (vak) {
+
+                                document.getElementById('edit-duur').value = vak.duur;
+                                document.getElementById('edit-sessies').value = vak.sessies;
+                            } else {
+                                document.getElementById('edit-duur').value = '';
+                                document.getElementById('edit-sessies').value = '';
+                            }
+                        });
 
                     }
                 });

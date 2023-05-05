@@ -52,14 +52,14 @@
                         </select>
                     </div>
                     <div class="flex ">
-                        <div id="duur_div" class=" hidden ml-4">
+                        <div id="duur_div" class="  ml-4">
                             <label class="block font-medium text-sm text-gray-700" for="duur">Duur</label>
-                            <input type="time" id="duur" name="duur" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" readonly>
+                            <input type="time" id="edit-duur" name="duur" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" readonly>
                         </div>
 
-                        <div id="sessies_div" class=" hidden ml-4">
+                        <div id="sessies_div" class="  ml-4">
                             <label class="block font-medium text-sm text-gray-700" for="sessies">Sessies</label>
-                            <input type="text" id="sessies" name="sessies" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" readonly>
+                            <input type="text" id="edit-sessies" name="sessies" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" readonly>
                         </div>
                     </div>
                 </div>
