@@ -146,8 +146,15 @@
                                 return vak.naam === vak_value;
                             });
                             if (vak) {
+                                var eventId = info.event.id;
                                 document.getElementById('edit-duur').value = vak.duur;
                                 document.getElementById('edit-sessies').value = vak.sessies;
+                                document.getElementById('update-vak_id').value = vak.id;
+                                console.log(eventId);
+
+                                const form = document.getElementById('edit-form');
+                                const url = `/planning/`+ eventId;
+                                form.setAttribute('action', url);
                             } else {
                                 document.getElementById('edit-duur').value = '';
                                 document.getElementById('edit-sessies').value = '';

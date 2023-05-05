@@ -27,9 +27,10 @@
     <div class="">
         <div class="px-6 py-4 w-1/2">
             <h2 class="text-lg font-medium text-gray-900">Evenement bewerken:</h2>
-            <form action="" method="POST">
+            <form action="" method="POST"  id="edit-form">
                 @csrf
-                <input  type="hidden" id="vak_id" name="vak_id">
+                @method('PUT')
+                <input  type="hidden" id="update-vak_id" name="vak_id">
 
                 <div class="mb-4">
                     <label class="block font-medium text-sm text-gray-700" for="date">Datum</label>
