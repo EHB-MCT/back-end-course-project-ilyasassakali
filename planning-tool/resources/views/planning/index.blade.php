@@ -126,6 +126,7 @@
                             deleteOverlay.style.display = "block";
                         });
 
+                        updateEditFields();
 
 
                         document.getElementById("edit-modal-close-btn").addEventListener("click", function () {
@@ -136,22 +137,23 @@
                             editOverlay.style.display = "none";
                         });
 
-                        document.getElementById('edit-vak').addEventListener('change', function () {
-                            var vak_value = this.value;
-                            var vak = @json($vakken->toArray())
+                        document.getElementById('edit-vak').addEventListener('change', updateEditFields);
 
+                        function updateEditFields() {
+                            var vak_value = document.getElementById('edit-vak').value;
+                            var vak = @json($vakken->toArray())
                         .find(function (vak) {
                                 return vak.naam === vak_value;
                             });
                             if (vak) {
-
                                 document.getElementById('edit-duur').value = vak.duur;
                                 document.getElementById('edit-sessies').value = vak.sessies;
                             } else {
                                 document.getElementById('edit-duur').value = '';
                                 document.getElementById('edit-sessies').value = '';
                             }
-                        });
+                        }
+
 
                     }
                 });
