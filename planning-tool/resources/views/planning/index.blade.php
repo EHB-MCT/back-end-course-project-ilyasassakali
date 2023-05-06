@@ -12,10 +12,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h2>Selecteer en klik om de planning op te stellen:</h2>
+                    <h2>Selecteer of klik op de planning om een evenement toe te voegen of klik op een evenement om te verwijderen of bewerken:</h2>
                     @if(session('success-message'))
                         <div class="" style="color: green">
                             {{ session('success-message') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="" style="color: red">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
                     <div id='calendar'></div>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\DurationMatchesVak;
 use App\Rules\TimeFormat;
 use Illuminate\Http\Request;
 use App\Models\Vak;
 use App\Models\Agenda;
 use function Sodium\compare;
+
 
 
 class AgendaController extends Controller
@@ -44,13 +46,15 @@ class AgendaController extends Controller
 
 
     }
+
+
     public function storeEvent(Request $request)
     {
         $data = $request->validate([
             'vak_id' => 'required|integer',
             'datum' => 'required|date',
             'beginuur' => ['required', new TimeFormat()],
-            'einduur' => ['required', new TimeFormat()],
+            'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
             'lokaal' => 'required',
             'leerkracht' => 'required'
         ]);
@@ -59,6 +63,8 @@ class AgendaController extends Controller
 
         return redirect()->route('planning.index')->with('success-message', 'Evenement succesvol gepland!');
     }
+
+
 
     public function deleteEvent(Agenda $agenda)
     {
@@ -74,7 +80,7 @@ class AgendaController extends Controller
             'vak_id' => 'required|integer',
             'datum' => 'required|date',
             'beginuur' => ['required', new TimeFormat()],
-            'einduur' => ['required', new TimeFormat()],
+            'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
             'lokaal' => 'required',
             'leerkracht' => 'required'
         ]);
