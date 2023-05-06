@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rules\DurationMatchesVak;
+use App\Rules\SessionsLimit;
 use App\Rules\TimeFormat;
 use Illuminate\Http\Request;
 use App\Models\Vak;
@@ -51,7 +52,7 @@ class AgendaController extends Controller
     public function storeEvent(Request $request)
     {
         $data = $request->validate([
-            'vak_id' => 'required|integer',
+            'vak_id' => ['required', 'integer', new SessionsLimit($request->vak_id)],
             'datum' => 'required|date',
             'beginuur' => ['required', new TimeFormat()],
             'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
@@ -77,7 +78,7 @@ class AgendaController extends Controller
     public function update(Request $request, Agenda $agenda)
     {
         $data = $request->validate([
-            'vak_id' => 'required|integer',
+            'vak_id' => ['required', 'integer', new SessionsLimit($request->vak_id)],
             'datum' => 'required|date',
             'beginuur' => ['required', new TimeFormat()],
             'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
