@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Vak;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class VakController extends Controller
 {
@@ -31,6 +35,23 @@ class VakController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'naam' => [
+                'required',
+                Rule::unique('vakken', 'naam'),
+            ],
+            'opleiding' => 'required',
+            'semester' => 'required|integer|min:1|max:2',
+            'duur' => 'required',
+            'sessies' => 'required|integer',
+        ], [
+            'naam.unique' => 'De naam van het vak bestaat al!',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error-message', $validator->errors()->first());
+        }
+
         $input = $request->all();
         Vak::create($input);
         return redirect('vak')->with('success-message','Vak succesvol aangemaakt!');
@@ -59,6 +80,24 @@ class VakController extends Controller
     public function update(Request $request, string $id)
     {
         $vak = Vak::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'naam' => [
+                'required',
+                Rule::unique('vakken', 'naam')->ignore($id),
+            ],
+            'opleiding' => 'required',
+            'semester' => 'required|integer|min:1|max:2',
+            'duur' => 'required',
+            'sessies' => 'required|integer',
+        ], [
+            'naam.unique' => 'De naam van het vak bestaat al!',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error-message', $validator->errors()->first());
+        }
+
         $input = $request->all();
         $vak->update($input);
         return redirect('vak')->with('success-message','Vak succesvol bewerkt!');

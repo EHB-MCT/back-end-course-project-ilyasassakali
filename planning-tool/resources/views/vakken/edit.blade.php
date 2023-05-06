@@ -11,6 +11,13 @@
                 <div class="p-6 text-gray-900">
                     <h2 class="text-lg font-medium text-gray-900">Bewerk vak:</h2>
 
+                    @if(session('error-message'))
+                        <div class="mt-4" style="color: red">
+                            {{ session('error-message') }}
+                        </div>
+                    @endif
+
+
                     <form action="{{ route('vak.update', $vakken->id) }}" method="post" class="max-w-md mx-auto mt-4 ">
                         {!! method_field('patch') !!}
 
