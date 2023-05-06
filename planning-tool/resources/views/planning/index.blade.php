@@ -94,13 +94,17 @@
                                 document.getElementById('vak_id').value = vak.id;
                                 document.getElementById('duur_div').style.display = 'block';
                                 document.getElementById('sessies_div').style.display = 'block';
+                                document.getElementById('semester_div').style.display = 'block';
                                 document.getElementById('duur').value = vak.duur;
                                 document.getElementById('sessies').value = vak.sessies;
+                                document.getElementById('semester').value = vak.semester;
                             } else {
                                 document.getElementById('duur_div').style.display = 'none';
                                 document.getElementById('sessies_div').style.display = 'none';
+                                document.getElementById('semester_div').style.display = 'none';
                                 document.getElementById('duur').value = '';
                                 document.getElementById('sessies').value = '';
+                                document.getElementById('semester').value = '';
                             }
                         });
                     },
@@ -161,6 +165,7 @@
                                 var eventId = info.event.id;
                                 document.getElementById('edit-duur').value = vak.duur;
                                 document.getElementById('edit-sessies').value = vak.sessies;
+                                document.getElementById('edit-semester').value = vak.semester;
                                 document.getElementById('update-vak_id').value = vak.id;
                                 console.log(eventId);
 
@@ -170,6 +175,7 @@
                             } else {
                                 document.getElementById('edit-duur').value = '';
                                 document.getElementById('edit-sessies').value = '';
+                                document.getElementById('edit-semester').value = '';
                             }
                         }
 

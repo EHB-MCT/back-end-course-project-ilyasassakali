@@ -20,6 +20,7 @@
 - https://fullcalendar.io/docs
 - https://techvblogs.com/blog/laravel-9-custom-validation-rules
 - https://laravel.com/docs/5.0/validation#custom-validation-rules
+- https://carbon.nesbot.com/docs/
 
 ## About Laravel
 
