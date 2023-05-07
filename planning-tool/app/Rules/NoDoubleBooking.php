@@ -7,8 +7,11 @@ use App\Models\Agenda;
 
 class NoDoubleBooking implements Rule
 {
-    public function __construct()
+    protected $eventId;
+
+    public function __construct($eventId = null)
     {
+        $this->eventId = $eventId;
     }
 
     public function passes($attribute, $value)
@@ -20,6 +23,9 @@ class NoDoubleBooking implements Rule
         $leerkracht = request()->input('leerkracht');
 
         $existingEvents = Agenda::where('datum', $datum)
+            ->when($this->eventId, function ($query) {
+                $query->where('id', '<>', $this->eventId);
+            })
             ->where(function ($query) use ($lokaal, $leerkracht) {
                 $query->where('lokaal', $lokaal)
                     ->orWhere('leerkracht', $leerkracht);

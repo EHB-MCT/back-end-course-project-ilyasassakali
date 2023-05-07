@@ -80,9 +80,9 @@ class AgendaController extends Controller
     public function update(Request $request, Agenda $agenda)
     {
         $data = $request->validate([
-            'vak_id' => ['required', 'integer', new SessionsLimit($request->vak_id)],
+            'vak_id' => ['required', 'integer', new SessionsLimit($request->vak_id, $agenda->id)],
             'datum' => ['required', 'date', new SemesterDate($request->vak_id)],
-            'beginuur' => ['required', new TimeFormat(), new NoDoubleBooking()],
+            'beginuur' => ['required', new TimeFormat(), new NoDoubleBooking($agenda->id)],
             'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
             'lokaal' => 'required',
             'leerkracht' => 'required'

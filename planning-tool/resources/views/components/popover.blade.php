@@ -16,6 +16,8 @@
     border-width: 5px;
     border-color: transparent;
     z-index: 1000;
+
+
 }
 .popover.top::before {
     bottom: -10px;
@@ -27,3 +29,4 @@
     left: calc(50% - 5px);
     border-bottom-color: #ccc;
 }
+

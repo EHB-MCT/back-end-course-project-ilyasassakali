@@ -9,16 +9,21 @@ use App\Models\Agenda;
 class SessionsLimit implements Rule
 {
     protected $vak_id;
+    protected $eventId;
 
-    public function __construct($vak_id)
+    public function __construct($vak_id, $eventId = null)
     {
         $this->vak_id = $vak_id;
+        $this->eventId = $eventId;
     }
 
     public function passes($attribute, $value)
     {
         $vak = Vak::find($this->vak_id);
-        $plannedSessions = Agenda::where('vak_id', $this->vak_id)->count();
+        $plannedSessions = Agenda::where('vak_id', $this->vak_id)
+            ->when($this->eventId, function ($query) {
+                $query->where('id', '<>', $this->eventId);
+            })->count();
 
         return $plannedSessions < $vak->sessies;
     }
