@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rules\DurationMatchesVak;
+use App\Rules\NoDoubleBooking;
 use App\Rules\SemesterDate;
 use App\Rules\SessionsLimit;
 use App\Rules\TimeFormat;
@@ -55,7 +56,7 @@ class AgendaController extends Controller
         $data = $request->validate([
             'vak_id' => ['required', 'integer', new SessionsLimit($request->vak_id)],
             'datum' => ['required', 'date', new SemesterDate($request->vak_id)],
-            'beginuur' => ['required', new TimeFormat()],
+            'beginuur' => ['required', new TimeFormat(), new NoDoubleBooking()],
             'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
             'lokaal' => 'required',
             'leerkracht' => 'required'
@@ -81,7 +82,7 @@ class AgendaController extends Controller
         $data = $request->validate([
             'vak_id' => ['required', 'integer', new SessionsLimit($request->vak_id)],
             'datum' => ['required', 'date', new SemesterDate($request->vak_id)],
-            'beginuur' => ['required', new TimeFormat()],
+            'beginuur' => ['required', new TimeFormat(), new NoDoubleBooking()],
             'einduur' => ['required', new TimeFormat(), new DurationMatchesVak($request->vak_id)],
             'lokaal' => 'required',
             'leerkracht' => 'required'
