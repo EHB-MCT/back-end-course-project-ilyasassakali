@@ -10,17 +10,18 @@
 ## Run this to seed Adminuser
 ./vendor/bin/sail php artisan db:seed
 
-## Gebruikte links
+## Documentation ilyas assakali
 
-- videos en cursus leerkracht backend EHB multimedia 
-- https://laravel.com/docs/9.x/starter-kits#laravel-breeze
-- https://fullcalendar.io/docs/initialize-globals
-- https://laravel.com/docs/10.x/sail#main-content
-- https://fullcalendar.io/docs/selectable
-- https://fullcalendar.io/docs
-- https://techvblogs.com/blog/laravel-9-custom-validation-rules
-- https://laravel.com/docs/5.0/validation#custom-validation-rules
-- https://carbon.nesbot.com/docs/
+- videos en cursus leerkracht backend EHB multimedia -> for basic implementation mvc-patroon and crud-system
+- https://laravel.com/docs/9.x/starter-kits#laravel-breeze -> added for starterkit 
+- https://fullcalendar.io/docs/initialize-globals -> download fullcalendarjs library
+- https://laravel.com/docs/10.x/sail#main-content -> laravel sail commando's
+- https://fullcalendar.io/docs/selectable -> select hour range feature in calendar
+- https://fullcalendar.io/docs -> docs I used to add some fullcalendar features
+- https://techvblogs.com/blog/laravel-9-custom-validation-rules -> learned rules in laravel to add some errors for planning logic
+- https://laravel.com/docs/5.0/validation#custom-validation-rules -> learned rules in laravel to add some errors for planning logic
+- https://carbon.nesbot.com/docs/ -> carbon library used for logic related to semesterDate Rule
+- https://tailwindcss.com/docs/ tailwind docs used to style
 
 ## About Laravel
 
